@@ -20,6 +20,8 @@ import { globalIgnores } from 'eslint/config';
 import prettier from 'eslint-config-prettier'; // 禁用与 Prettier 冲突的 ESLint 规则
 import pluginPrettier from 'eslint-plugin-prettier'; // 将 Prettier 作为 ESLint 规则运行
 
+import importPlugin from 'eslint-plugin-import';
+
 // 导出 ESLint 配置，使用 tseslint.config() 函数创建 TypeScript 友好的配置
 export default tseslint.config([
   // 设置全局忽略模式，告诉 ESLint 忽略这些文件和目录
@@ -48,6 +50,7 @@ export default tseslint.config([
     // 配置插件，插件提供额外的规则和功能
     plugins: {
       prettier: pluginPrettier, // Prettier 插件
+      import: importPlugin, // Import 插件
     },
 
     // 自定义规则，覆盖或扩展扩展配置中的规则
@@ -72,6 +75,33 @@ export default tseslint.config([
       'no-console': [
         'warn', // 违反规则时显示警告
         { allow: ['warn', 'error'] }, // 允许的方法
+      ],
+
+      // 添加导入顺序规则
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin', // Node.js 内置模块（如 'path', 'fs'）
+            'external', // 外部依赖（如 'react', 'lodash'）
+            'internal', // 项目内部模块
+            ['parent', 'sibling', 'index'], // 相对路径导入
+            'type', // TypeScript 类型导入
+          ],
+          pathGroups: [
+            {
+              pattern: '{react,react-dom/**}', // React 相关模块优先
+              group: 'external',
+              position: 'before',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['react'],
+          'newlines-between': 'always', // 组之间添加空行
+          alphabetize: {
+            order: 'asc', // 按字母顺序排序
+            caseInsensitive: true, // 不区分大小写
+          },
+        },
       ],
     },
   },
