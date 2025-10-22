@@ -1,7 +1,7 @@
 // components/Navbar/Logo.tsx
 import React from 'react';
 
-import Icon from '../Icon';
+import Icon from '../../Icon';
 // 必须添加 ?react 后缀，强制插件将 SVG 转为 React 组件
 // import MapleLeaf from '@/assets/icons/maple-leaf.svg?react'; // 确保路径正确
 

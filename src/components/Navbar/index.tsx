@@ -1,8 +1,8 @@
 // components/Navbar/index.tsx
 import React from 'react';
 
-import { Logo } from './Logo';
-// import { NavLinks } from './NavLinks';
+import { Logo } from './logo';
+import NavLinks from './navLinks';
 // import { ActionButtons } from './ActionButtons';
 
 export const Navbar: React.FC = () => {
@@ -11,7 +11,7 @@ export const Navbar: React.FC = () => {
       {/* 容器：限制宽度并居中内容 */}
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Logo />
-        {/* <NavLinks /> */}
+        <NavLinks />
         {/* <ActionButtons /> */}
       </div>
     </nav>
